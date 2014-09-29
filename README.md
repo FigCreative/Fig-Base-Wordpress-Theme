@@ -1,4 +1,4 @@
-Fig Wordpress Base With SVG, Webp and UnCSS
+Fig Wordpress Base With SVG, Webp, UnCSS and BrowserSync
 ======
 Based on Wadehammes Version @ wadehammes/base-foundation-wordpress
 ----
