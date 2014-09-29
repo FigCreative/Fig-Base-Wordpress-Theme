@@ -31,6 +31,12 @@ In terminal:
 Install the Node Modules into the project, also install the Bower dependencies into the project, and run pre-production grunt:
 <code>$ npm install && bower install && grunt</code>
 
+To watch and compile the files you change (SASS & JS) use:
+<code>$ grunt watch</code>
+
+To watch your files and update your browser instantly used:
+<code>$ grunt review</code>
+*Make sure MAMP is running with localhost:8888, or change the settings in gruntfile.
 
 In order to update packages, run this every so often to keep everything up-to-date:
 <code>$ bower update</code>
