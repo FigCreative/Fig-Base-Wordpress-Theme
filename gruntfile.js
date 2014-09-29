@@ -124,6 +124,18 @@ module.exports = function(grunt) {
             }
         },
 
+        browserSync: {
+            dev: {
+                bsFiles: {
+                    src : ['wordpress/wp-content/themes/yourprojectname/library/css/*.min.css', 'templates/css/*.css']
+                },
+                options: {
+                    proxy: "localhost:8888",
+                    watchTask: true // < VERY important
+                }
+            }
+        },
+
         imagemin: {                         
             dynamic: {   
             options: {                      
@@ -164,7 +176,7 @@ module.exports = function(grunt) {
     grunt.task.run('notify_hooks');
 
     // Pre Production
-    grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync', 'watch']);
+    grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync', 'browserSync', 'watch']);
 
     // Production Run
     grunt.registerTask('launch', ['sass', 'autoprefixer', 'exec:get_grunt_sitemap','load_sitemap_json','uncss:dist', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync']);
@@ -174,6 +186,9 @@ module.exports = function(grunt) {
 
     // Run just JS production
     grunt.registerTask('jsrun', ['concat', 'sync', 'uglify']);
+
+    //Watch for CSS / JS changes and update browser
+    grunt.registerTask('review', ['browserSync', 'watch']);
 
     grunt.registerTask('app_change', ['concat:app', 'uglify:app', 'uglify:main', 'uglify:yourprojectname']);
     grunt.registerTask('concat_change', ['uglify:app', 'uglify:main']);
@@ -186,6 +201,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-uncss');
     grunt.registerTask('sync_files', ['sync'])
     grunt.loadNpmTasks('grunt-exec');
+    grunt.loadNpmTasks('grunt-browser-sync');
 
     // Load Sitemap
     grunt.registerTask('load_sitemap_json', function() {
