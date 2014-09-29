@@ -1,0 +1,7 @@
+{
+  "name": "FigDigital Theme",
+  "dependencies": {
+    "foundation": "zurb/bower-foundation",
+    "60fps-scroll": ""
+  }
+}

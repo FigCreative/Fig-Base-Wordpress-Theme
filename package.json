@@ -1,0 +1,25 @@
+{
+  "name": "FigDigital",
+  "version": "0.0.1",
+  "author": "David Maran @ FigDigital",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "node-sass": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-sass": "*",
+    "grunt-notify": "*",
+    "grunt-autoprefixer": "*",
+    "grunt-contrib-cssmin": "*",
+    "grunt-sync": "*",
+    "matchdep": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-imagemin": "^0.7.0",
+    "grunt-webp": "0.0.4",
+    "webp-bin": "*",
+    "grunt-uncss": "*",
+    "grunt-exec": "*"
+     
+  }
+}
