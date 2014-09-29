@@ -176,7 +176,7 @@ module.exports = function(grunt) {
     grunt.task.run('notify_hooks');
 
     // Pre Production
-    grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync', 'browserSync', 'watch']);
+    grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync']);
 
     // Production Run
     grunt.registerTask('launch', ['sass', 'autoprefixer', 'exec:get_grunt_sitemap','load_sitemap_json','uncss:dist', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync']);
