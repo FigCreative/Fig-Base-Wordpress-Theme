@@ -19,7 +19,7 @@
     "grunt-webp": "0.0.4",
     "webp-bin": "*",
     "grunt-uncss": "*",
-    "grunt-exec": "*"
-     
+    "grunt-exec": "*",
+    "grunt-browser-sync": "^1.5.2"
   }
 }
