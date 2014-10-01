@@ -20,6 +20,9 @@
     "webp-bin": "*",
     "grunt-uncss": "*",
     "grunt-exec": "*",
-    "grunt-browser-sync": "^1.5.2"
+    "grunt-browser-sync": "^1.5.2",
+    "grunt-ftp-upload": "^0.1.1",
+    "grunt-mysqldump": "0.0.2",
+    "grunt-replace": "^0.7.9"
   }
 }

@@ -1,13 +1,22 @@
 module.exports = function(grunt) {
-
     require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
     grunt.initConfig({
+
+        projectname: 'yourprojectname',
+        projectslugname: 'your-project-slug',
+        liveurl: 'http://www.liveurl.co.uk',
+        dbuser: 'root',
+        dbpass: 'root',
+        dbhost: 'localhost',
+        dbport: '8889',
+        ftpaddress: 'ftpaddreshere',
+
         pkg: grunt.file.readJSON('package.json'),
         notify_hooks: {
             options: {
                 enabled: true,
                 max_jshint_notifications: 5,
-                title: "Your Project Name" 
+                title: "<%= projectname %>" 
             }
         },
    
@@ -25,7 +34,7 @@ module.exports = function(grunt) {
         uglify: {
             dist: {
                 files: {
-                        'wordpress/wp-content/themes/yourprojectname/library/js/scripts.min.js': 'templates/js/scripts.js'
+                        'wordpress/wp-content/themes/<%= projectslugname %>/library/js/scripts.min.js': 'templates/js/scripts.js'
             }
         }
         },
@@ -47,7 +56,7 @@ module.exports = function(grunt) {
                     outputStyle: 'compressed'
                 },
                 files: {
-                    'wordpress/wp-content/themes/yourprojectname/library/css/ie.min.css': 'scss/ie.scss',
+                    'wordpress/wp-content/themes/<%= projectslugname %>/library/css/ie.min.css': 'scss/ie.scss',
                 } 
             }
         },
@@ -67,7 +76,7 @@ module.exports = function(grunt) {
                 expand: true,
                 cwd: 'templates/css/',
                 src: ['*.css', '!*.min.css'],
-                dest: 'wordpress/wp-content/themes/yourprojectname/library/css/',
+                dest: 'wordpress/wp-content/themes/<%= projectslugname %>/library/css/',
                 ext: '.min.css'
             },
         },
@@ -77,7 +86,7 @@ module.exports = function(grunt) {
                 files: [{
                     cwd: 'templates/img',
                     src: '**',
-                    dest: 'wordpress/wp-content/themes/yourprojectname/library/images/',
+                    dest: 'wordpress/wp-content/themes/<%= projectslugname %>/library/images/',
                 }]
             }
         },
@@ -107,7 +116,7 @@ module.exports = function(grunt) {
                 tasks: ['sass_change']
             },
             css: {
-                files: ['wordpress/wp-content/themes/yourprojectname/*.css', 'css/*.css'],
+                files: ['wordpress/wp-content/themes/<%= projectslugname %>/*.css', 'css/*.css'],
                 tasks: ['notify:css_complete', 'css_prefixed', 'css_min']
             },
         },
@@ -127,7 +136,7 @@ module.exports = function(grunt) {
         browserSync: {
             dev: {
                 bsFiles: {
-                    src : ['wordpress/wp-content/themes/yourprojectname/library/css/*.min.css', 'templates/css/*.css']
+                    src : ['wordpress/wp-content/themes/<%= projectslugname %>/library/css/*.min.css', 'templates/css/*.css']
                 },
                 options: {
                     proxy: "localhost:8888",
@@ -153,10 +162,67 @@ module.exports = function(grunt) {
 
         exec: {
           get_grunt_sitemap: {
-            command: 'curl --silent --output sitemap.json http://www.yourprojectname.co.uk/?show_sitemap'
+            command: 'curl --silent --output sitemap.json <%= liveurl %>?show_sitemap'
           }
         },
-    
+
+        'theme-upload': {
+          build: {
+            auth: {
+              host: '91.109.5.25',
+              port: 21,
+              authKey: 'key1'
+            },
+            src: 'wordpress/wp-content/themes/<%= projectslugname %>',
+            dest: 'public_html/wp-content/themes/<%= projectslugname %>',
+            exclusions: ['public_html/wp-content/themes/<%= projectslugname %>/**/.DS_Store', 'public_html/wp-content/themes/<%= projectslugname %>/**/Thumbs.db', 'dist/tmp']
+          }
+        },
+
+        'wordpress-upload': {
+          build: {
+            auth: {
+              host: '<%= ftpaddress %>',
+              port: 21,
+              authKey: 'key1'
+            },
+            src: 'wordpress',
+            dest: 'public_html',
+            exclusions: ['public_html/**/.DS_Store', 'public_html/**/Thumbs.db', 'dist/tmp']
+          }
+        },
+
+        mysqldump: {
+          dist: {
+            user: '<%= dbuser %>',
+            pass: '<%= dbpass %>',
+            host: '<%= dbhost %>',
+            port: '<%= dbport %>',
+            dest: 'db/local/',
+            options: {
+            },
+            databases: [
+              'figdig'
+            ],
+          },
+        },
+
+        replace: {
+          dist: {
+            options: {
+              patterns: [
+                {
+                 match: 'http://localhost:8888/wordpress',
+                 replacement: '<%= liveurl %>'
+                }
+              ],
+              usePrefix: false
+            },
+            files: [
+              {expand: true, flatten: true, src: ['db/local/*.sql'], dest: 'db/production/'}
+            ]
+          }
+        },
         uncss: {
           dist: {
             options: {
@@ -179,7 +245,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync']);
 
     // Production Run
-    grunt.registerTask('launch', ['sass', 'autoprefixer', 'exec:get_grunt_sitemap','load_sitemap_json','uncss:dist', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync']);
+    grunt.registerTask('launch', ['sass', 'autoprefixer', 'exec:get_grunt_sitemap','load_sitemap_json','uncss:dist', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync', 'mysqldump', 'replace']);
 
     // Run Just CSS Production
     grunt.registerTask('cssfix', ['sass', 'autoprefixer', 'exec:get_grunt_sitemap','load_sitemap_json','uncss:dist', 'cssmin', 'concat']);
@@ -201,11 +267,23 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-uncss');
     grunt.registerTask('sync_files', ['sync'])
     grunt.loadNpmTasks('grunt-exec');
+    grunt.loadNpmTasks('grunt-ftp-upload');
     grunt.loadNpmTasks('grunt-browser-sync');
+    grunt.loadNpmTasks('grunt-mysqldump');
+    grunt.loadNpmTasks('grunt-replace');
 
     // Load Sitemap
     grunt.registerTask('load_sitemap_json', function() {
         var sitemap_urls = grunt.file.readJSON('./sitemap.json');
         grunt.config.set('uncss.dist.options.urls', sitemap_urls);
     });
-};
+
+    // Create production DB with url replacement
+    grunt.registerTask('db', function() {
+        setTimeout(function() {
+             grunt.task.run('mysqldump');
+              done();
+            }, 1000);
+            grunt.task.run('replace');
+        });
+    };
