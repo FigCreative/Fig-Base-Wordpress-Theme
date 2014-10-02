@@ -54,4 +54,5 @@ bower_components/
 node_modules/
 sftp-config.json
 db/
-
+db
+/db
