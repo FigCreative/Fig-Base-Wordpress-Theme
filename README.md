@@ -61,16 +61,22 @@ List of Useful Grunt commands
 -------
 Your project name, can have spaces.
 <code>projectname: 'yourprojectname',</code>
+<br />
 Project slug/ Theme name, must not contain spaces
 <code>projectslugname: 'your-project-slug',</code>
+<br />
 URL of where your live/online version shall be
 <code>liveurl: 'http://www.liveurl.co.uk',</code>
+<br />
 Your local Database Username
 <code>dbuser: 'root',</code>
+<br />
 Your local Database Password
 <code>dbpass: 'root',</code>
+<br />
 Your local host - normally 'localhost'.
 <code>dbhost: 'localhost',</code>
+<br />
 Your local Database port, for mamp usually '8889'.
 <code>dbport: '8889',</code>
 
