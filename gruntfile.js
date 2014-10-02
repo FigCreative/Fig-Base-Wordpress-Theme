@@ -246,6 +246,9 @@ module.exports = function(grunt) {
     // Production Run
     grunt.registerTask('launch', ['sass', 'autoprefixer', 'exec:get_grunt_sitemap','load_sitemap_json','uncss:dist', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync', 'db']);
 
+    // Production Run
+    grunt.registerTask('launchv2', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync', 'db']);
+
     // Run Just CSS Production
     grunt.registerTask('cssfix', ['sass', 'autoprefixer', 'exec:get_grunt_sitemap','load_sitemap_json','uncss:dist', 'cssmin', 'concat']);
 

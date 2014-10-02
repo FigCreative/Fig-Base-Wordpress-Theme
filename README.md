@@ -91,6 +91,9 @@ Review changes or have live changes in your browser, only works on localhost
 Staging/ Production Commands, Shall convert all images, and do CSS Unused, this will remove all CSS classes that are not used on the website. A backup of your local database shall also be created, with a production db that has all the urls changed as set in the grunt file.
 <code>$ grunt launch</code>
 
+To run launch without the Uncss, this should be used if your have errors in the standard launch.
+<code>$ grunt launchv2</code>
+
 To watch your files that change and run grunt tasks:
 <code>$ grunt watch</code>
 
