@@ -1,4 +1,4 @@
-Fig Wordpress Base With SVG, Webp, UnCSS and BrowserSync
+Fig Wordpress Base theme With SVG, Webp, UnCSS, BrowserSync, local db backup, db creation for production, ftp file upload
 ======
 Based on Wadehammes Version @ wadehammes/base-foundation-wordpress
 ----
@@ -57,8 +57,6 @@ Start building something awesome.
 Grunt settings to set
 -------
 
-List of Useful Grunt commands
--------
 Your project name, can have spaces.<br />
 <code>projectname: 'yourprojectname',</code>
 <br /><br />
@@ -82,6 +80,9 @@ Your local Database port, for mamp usually '8889'.<br />
 
 Please add your live website ftp details in '.ftppass' file.
 
+List of Useful Grunt commands
+-------
+
 Pre-Production: To run the quick command that gets all the files in the correct place, this should be used for larger updates that span across a range of files.<br />
 <code>$ grunt</code>
 
@@ -94,11 +95,17 @@ Convert and minify on your js files<br />
 Review changes or have live changes in your browser, only works on localhost<br />
 <code>$ grunt review</code>
 
-Staging/ Production Commands, Shall convert all images, and do CSS Unused, this will remove all CSS classes that are not used on the website. A backup of your local database shall also be created, with a production db that has all the urls changed as set in the grunt file.<br />
+Staging, Shall convert all images, and do CSS Unused, this will remove all CSS classes that are not used on the website. A backup of your local database shall also be created, with a production db that has all the urls changed as set in the grunt file.<br />
 <code>$ grunt launch</code>
 
-To run launch without the Uncss, this should be used if your have errors in the standard launch.<br />
-<code>$ grunt launchv2</code>
+First upload onto the server, includes wordpress and all relevant files, make sure the config file is setup in wordpress. Also upload the production database in the <code>db/production/</code>
+<code>$ grunt wordpress-upload</code>
+
+Alterations or changes to the website should then be uploaded using this command as it does not reupload wordpress base files.
+<code>$ grunt wpcontent-upload</code>
+
+For production, run this to remove all unused css. Make sure settings in grunt are setup correctly.<br />
+<code>$ grunt cssfix</code>
 
 To watch your files that change and run grunt tasks:<br />
 <code>$ grunt watch</code>
