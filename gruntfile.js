@@ -9,7 +9,6 @@ module.exports = function(grunt) {
         dbpass: 'root',
         dbhost: 'localhost',
         dbport: '8889',
-        ftpaddress: 'ftpaddreshere',
 
         pkg: grunt.file.readJSON('package.json'),
         notify_hooks: {
@@ -245,7 +244,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync']);
 
     // Production Run
-    grunt.registerTask('launch', ['sass', 'autoprefixer', 'exec:get_grunt_sitemap','load_sitemap_json','uncss:dist', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync', 'mysqldump', 'replace']);
+    grunt.registerTask('launch', ['sass', 'autoprefixer', 'exec:get_grunt_sitemap','load_sitemap_json','uncss:dist', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync', 'db']);
 
     // Run Just CSS Production
     grunt.registerTask('cssfix', ['sass', 'autoprefixer', 'exec:get_grunt_sitemap','load_sitemap_json','uncss:dist', 'cssmin', 'concat']);
@@ -253,7 +252,7 @@ module.exports = function(grunt) {
     // Run just JS production
     grunt.registerTask('jsrun', ['concat', 'sync', 'uglify']);
 
-    //Watch for CSS / JS changes and update browser
+    // Watch for CSS / JS changes and update browser
     grunt.registerTask('review', ['browserSync', 'watch']);
 
     grunt.registerTask('app_change', ['concat:app', 'uglify:app', 'uglify:main', 'uglify:yourprojectname']);
