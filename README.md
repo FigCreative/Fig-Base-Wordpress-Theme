@@ -96,13 +96,13 @@ Run just CSS comparison to the live/staging website<br />
 Convert and minify on your js files<br />
 <code>$ grunt jsrun</code>
 
-Review changes or have live changes in your browser, only works on localhost<br />
-<code>$ grunt review</code>
+Live changes in your browser, only works on localhost - No need to refresh your browser<br />
+<code>$ grunt livechanges</code>
 
 Staging, Shall convert all images. A backup of your local database shall also be created, with a production db that has all the urls changed as set in the grunt file.<br />
 <code>$ grunt launch</code>
 
-First upload onto the server, includes wordpress and all relevant files, make sure the config file is setup in wordpress. Also upload the production database in the <code>db/production/</code><br />
+First upload onto the server, includes wordpress and all relevant files, make sure the config file is setup in wordpress. Also add the production database in the <code>db/production/</code><br />
 <code>$ grunt wordpress-upload</code>
 
 Alterations or changes to the website should then be uploaded using this command as it does not reupload wordpress base files.<br />

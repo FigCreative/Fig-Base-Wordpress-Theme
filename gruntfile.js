@@ -255,7 +255,7 @@ module.exports = function(grunt) {
     grunt.registerTask('jsrun', ['concat', 'sync', 'uglify']);
 
     // Watch for CSS / JS changes and update browser
-    grunt.registerTask('review', ['browserSync', 'watch']);
+    grunt.registerTask('livechanges', ['browserSync', 'watch']);
 
     grunt.registerTask('app_change', ['concat:app', 'uglify:app', 'uglify:main', 'uglify:yourprojectname']);
     grunt.registerTask('concat_change', ['uglify:app', 'uglify:main']);

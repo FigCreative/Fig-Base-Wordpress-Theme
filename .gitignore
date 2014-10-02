@@ -53,5 +53,5 @@ template/js
 bower_components/
 node_modules/
 sftp-config.json
-backup/
+db/
 
