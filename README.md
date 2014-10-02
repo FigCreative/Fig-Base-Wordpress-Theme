@@ -2,7 +2,7 @@ Fig Wordpress Base theme With SVG, Webp, UnCSS, BrowserSync, local db backup, db
 ======
 Based on Wadehammes Version @ wadehammes/base-foundation-wordpress
 ----
-Base Foundation is a template framework based on the <a href="http://foundation.zurb.com">Foundation</a> framework from Zurb, which utilizes <a href="http://sass-lang.com">SASS</a>, and is meant to be a starting point for a website build. It utilizes <a href="http://gruntjs.com/">Grunt</a>, which handles javascript tasks such as CSS minification and prefixing, SASS compilation, and JS concatenation and uglifying, folder syncing, and more. Webp and SVG support has been added also UnCss that removes all unused CSS elements from the file. Includes optimised .htaccess file for your wordpress website.
+Base Foundation is a template framework based on the <a href="http://foundation.zurb.com">Foundation</a> framework from Zurb, which utilizes <a href="http://sass-lang.com">SASS</a>, and is meant to be a starting point for a website build. It utilizes <a href="http://gruntjs.com/">Grunt</a>, which handles javascript tasks such as CSS minification and prefixing, SASS compilation, and JS concatenation and uglifying, folder syncing, and more. Webp and SVG support has been added also UnCss that removes all unused CSS elements from the file. Includes optimised .htaccess file for your wordpress website. Database backup, and production changed DB has also been added as well as a file uploading system.
 
 ####PRIOR TO FIRST USE:
 You will need to make sure you have the following installed to your machine (via Terminal):
@@ -76,7 +76,9 @@ Your local host - normally 'localhost'.<br />
 <code>dbhost: 'localhost',</code>
 <br /><br />
 Your local Database port, for mamp usually '8889'.<br />
-<code>dbport: '8889',</code>
+<code>dbport: '8889',</code><br /><br />
+Set your FTP ip / address<br />
+<code>ftpaddress: 'ftpiporaddress',</code>
 
 Please add your live website ftp details in '.ftppass' file.
 
@@ -98,10 +100,10 @@ Review changes or have live changes in your browser, only works on localhost<br 
 Staging, Shall convert all images, and do CSS Unused, this will remove all CSS classes that are not used on the website. A backup of your local database shall also be created, with a production db that has all the urls changed as set in the grunt file.<br />
 <code>$ grunt launch</code>
 
-First upload onto the server, includes wordpress and all relevant files, make sure the config file is setup in wordpress. Also upload the production database in the <code>db/production/</code>
+First upload onto the server, includes wordpress and all relevant files, make sure the config file is setup in wordpress. Also upload the production database in the <code>db/production/</code><br />
 <code>$ grunt wordpress-upload</code>
 
-Alterations or changes to the website should then be uploaded using this command as it does not reupload wordpress base files.
+Alterations or changes to the website should then be uploaded using this command as it does not reupload wordpress base files.<br />
 <code>$ grunt wpcontent-upload</code>
 
 For production, run this to remove all unused css. Make sure settings in grunt are setup correctly.<br />
