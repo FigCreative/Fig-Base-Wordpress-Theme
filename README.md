@@ -77,6 +77,8 @@ Your local host - normally 'localhost'.<br />
 <br /><br />
 Your local Database port, for mamp usually '8889'.<br />
 <code>dbport: '8889',</code><br /><br />
+Your local Database name<br />
+<code>dbname: 'namehere',</code><br /><br />
 Set your FTP ip / address<br />
 <code>ftpaddress: 'ftpiporaddress',</code>
 
@@ -97,7 +99,7 @@ Convert and minify on your js files<br />
 Review changes or have live changes in your browser, only works on localhost<br />
 <code>$ grunt review</code>
 
-Staging, Shall convert all images, and do CSS Unused, this will remove all CSS classes that are not used on the website. A backup of your local database shall also be created, with a production db that has all the urls changed as set in the grunt file.<br />
+Staging, Shall convert all images. A backup of your local database shall also be created, with a production db that has all the urls changed as set in the grunt file.<br />
 <code>$ grunt launch</code>
 
 First upload onto the server, includes wordpress and all relevant files, make sure the config file is setup in wordpress. Also upload the production database in the <code>db/production/</code><br />

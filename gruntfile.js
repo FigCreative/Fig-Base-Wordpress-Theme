@@ -9,6 +9,8 @@ module.exports = function(grunt) {
         dbpass: 'root',
         dbhost: 'localhost',
         dbport: '8889',
+        dbname: 'figdig',
+        ftpaddress: 'ftpiporaddress',
 
         pkg: grunt.file.readJSON('package.json'),
         notify_hooks: {
@@ -165,15 +167,15 @@ module.exports = function(grunt) {
           }
         },
 
-        'theme-upload': {
+        'wpcontent-upload': {
           build: {
             auth: {
-              host: '91.109.5.25',
+              host: '<%= ftpaddress %>',
               port: 21,
               authKey: 'key1'
             },
-            src: 'wordpress/wp-content/themes/<%= projectslugname %>',
-            dest: 'public_html/wp-content/themes/<%= projectslugname %>',
+            src: 'wordpress/wp-content',
+            dest: 'public_html/wp-content',
             exclusions: ['public_html/wp-content/themes/<%= projectslugname %>/**/.DS_Store', 'public_html/wp-content/themes/<%= projectslugname %>/**/Thumbs.db', 'dist/tmp']
           }
         },
@@ -201,7 +203,7 @@ module.exports = function(grunt) {
             options: {
             },
             databases: [
-              'figdig'
+              '<%= dbname %>'
             ],
           },
         },
@@ -244,10 +246,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync']);
 
     // Production Run
-    grunt.registerTask('launch', ['sass', 'autoprefixer', 'exec:get_grunt_sitemap','load_sitemap_json','uncss:dist', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync', 'db']);
-
-    // Production Run
-    grunt.registerTask('launchv2', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync', 'db']);
+    grunt.registerTask('launch', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync', 'db']);
 
     // Run Just CSS Production
     grunt.registerTask('cssfix', ['sass', 'autoprefixer', 'exec:get_grunt_sitemap','load_sitemap_json','uncss:dist', 'cssmin', 'concat']);
@@ -285,7 +284,7 @@ module.exports = function(grunt) {
         setTimeout(function() {
              grunt.task.run('mysqldump');
               done();
-            }, 1000);
+            }, 2000);
             grunt.task.run('replace');
         });
     };
