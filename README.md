@@ -59,48 +59,48 @@ Grunt settings to set
 
 List of Useful Grunt commands
 -------
-Your project name, can have spaces.
+Your project name, can have spaces.<br />
 <code>projectname: 'yourprojectname',</code>
-<br />
-Project slug/ Theme name, must not contain spaces
+<br /><br />
+Project slug/ Theme name, must not contain spaces<br />
 <code>projectslugname: 'your-project-slug',</code>
-<br />
-URL of where your live/online version shall be
+<br /><br />
+URL of where your live/online version shall be<br />
 <code>liveurl: 'http://www.liveurl.co.uk',</code>
-<br />
-Your local Database Username
+<br /><br />
+Your local Database Username<br />
 <code>dbuser: 'root',</code>
-<br />
-Your local Database Password
+<br /><br />
+Your local Database Password<br />
 <code>dbpass: 'root',</code>
-<br />
-Your local host - normally 'localhost'.
+<br /><br />
+Your local host - normally 'localhost'.<br />
 <code>dbhost: 'localhost',</code>
-<br />
-Your local Database port, for mamp usually '8889'.
+<br /><br />
+Your local Database port, for mamp usually '8889'.<br />
 <code>dbport: '8889',</code>
 
 Please add your live website ftp details in '.ftppass' file.
 
-Pre-Production: To run the quick command that gets all the files in the correct place, this should be used for larger updates that span across a range of files.
+Pre-Production: To run the quick command that gets all the files in the correct place, this should be used for larger updates that span across a range of files.<br />
 <code>$ grunt</code>
 
-Run just CSS comparison to the live/staging website
+Run just CSS comparison to the live/staging website<br />
 <code>$ grunt cssfix</code>
 
-Convert and minify on your js files
+Convert and minify on your js files<br />
 <code>$ grunt jsrun</code>
 
-Review changes or have live changes in your browser, only works on localhost
+Review changes or have live changes in your browser, only works on localhost<br />
 <code>$ grunt review</code>
 
-Staging/ Production Commands, Shall convert all images, and do CSS Unused, this will remove all CSS classes that are not used on the website. A backup of your local database shall also be created, with a production db that has all the urls changed as set in the grunt file.
+Staging/ Production Commands, Shall convert all images, and do CSS Unused, this will remove all CSS classes that are not used on the website. A backup of your local database shall also be created, with a production db that has all the urls changed as set in the grunt file.<br />
 <code>$ grunt launch</code>
 
-To run launch without the Uncss, this should be used if your have errors in the standard launch.
+To run launch without the Uncss, this should be used if your have errors in the standard launch.<br />
 <code>$ grunt launchv2</code>
 
-To watch your files that change and run grunt tasks:
+To watch your files that change and run grunt tasks:<br />
 <code>$ grunt watch</code>
 
 Your www root will be <code>wordpress/</code>, which is 3.8.1 as of this build. You will want to push the contents of this folder to your web root, and run the config. If you need help with that, see the Wordpress Codex - <a href="http://codex.wordpress.org/Getting_Started_with_WordPress">http://codex.wordpress.org/Getting_Started_with_WordPress</a>
