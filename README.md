@@ -54,14 +54,48 @@ Start building something awesome.
 - Use scss/project/media/screen.scss for screen styles
 - Use scss/project/media/print.scss for print styles
 
-To watch your files that change run :
-<code>$ grunt watch</code>
+Grunt settings to set
+-------
 
-Once the files are ready for production :
+List of Useful Grunt commands
+-------
+Your project name, can have spaces.
+<code>projectname: 'yourprojectname',</code>
+Project slug/ Theme name, must not contain spaces
+<code>projectslugname: 'your-project-slug',</code>
+URL of where your live/online version shall be
+<code>liveurl: 'http://www.liveurl.co.uk',</code>
+Your local Database Username
+<code>dbuser: 'root',</code>
+Your local Database Password
+<code>dbpass: 'root',</code>
+Your local host - normally 'localhost'.
+<code>dbhost: 'localhost',</code>
+Your local Database port, for mamp usually '8889'.
+<code>dbport: '8889',</code>
+
+Please add your live website ftp details in '.ftppass' file.
+
+Pre-Production: To run the quick command that gets all the files in the correct place, this should be used for larger updates that span across a range of files.
+<code>$ grunt</code>
+
+Run just CSS comparison to the live/staging website
+<code>$ grunt cssfix</code>
+
+Convert and minify on your js files
+<code>$ grunt jsrun</code>
+
+Review changes or have live changes in your browser, only works on localhost
+<code>$ grunt review</code>
+
+Staging/ Production Commands, Shall convert all images, and do CSS Unused, this will remove all CSS classes that are not used on the website. A backup of your local database shall also be created, with a production db that has all the urls changed as set in the grunt file.
 <code>$ grunt launch</code>
 
-If Files still have not changed, do a full grunt fresh with :
-<code>$ grunt</code>
+To run launch without the Uncss, this should be used if your have errors in the standard launch.
+<code>$ grunt launchv2</code>
+
+To watch your files that change and run grunt tasks:
+<code>$ grunt watch</code>
 
 Your www root will be <code>wordpress/</code>, which is 3.8.1 as of this build. You will want to push the contents of this folder to your web root, and run the config. If you need help with that, see the Wordpress Codex - <a href="http://codex.wordpress.org/Getting_Started_with_WordPress">http://codex.wordpress.org/Getting_Started_with_WordPress</a>
 
