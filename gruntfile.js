@@ -122,23 +122,11 @@ module.exports = function(grunt) {
             },
         },
 
-        webp: {
-            files: {
-                expand: true,
-                cwd: 'img',
-                src: ['*.png', '*.jpg', '*.gif'],
-                dest: 'templates/img'
-            },
-            options: {
-                binpath: require('webp-bin').path,
-            }
-        },
-
         browserSync: {
             dev: {
                 bsFiles: {
-                    src : ['wordpress/wp-content/themes/<%= projectslugname %>/library/css/*.min.css', 'templates/css/*.css']
-                },
+                    src : ['templates/css/app.css', 'templates/*.php', 'templates/inc/*.php', 'wordpress/wp-content/themes/rts/*.php']
+                }, // 'wordpress/wp-content/themes/<%= projectslugname %>/library/css/*.min.css', 
                 options: {
                     proxy: "localhost:8888",
                     watchTask: true // < VERY important
@@ -167,31 +155,31 @@ module.exports = function(grunt) {
           }
         },
 
-        'wpcontent-upload': {
-          build: {
-            auth: {
-              host: '<%= ftpaddress %>',
-              port: 21,
-              authKey: 'key1'
-            },
-            src: 'wordpress/wp-content',
-            dest: 'public_html/wp-content',
-            exclusions: ['public_html/wp-content/themes/<%= projectslugname %>/**/.DS_Store', 'public_html/wp-content/themes/<%= projectslugname %>/**/Thumbs.db', 'dist/tmp']
-          }
-        },
+    //-  'ftp_upload_theme': {
+    //-        build: {
+    //-        auth: {
+    //-        host: '<%= ftpaddress %>',
+    //-        port: 21,
+    //-        authKey: 'key1'
+    //-      },
+    //-     src: 'wordpress/wp-content',
+    //-       dest: 'rts/wp-content',
+    //-       exclusions: ['public_html/wp-content/themes/<%= projectslugname %>/**/.DS_Store', 'public_html/wp-content/themes/<%= projectslugname %>/**/Thumbs.db', 'dist/tmp']
+    //-     }
+    //-    },
 
-        'wordpress-upload': {
+       'ftp_upload': {
           build: {
             auth: {
               host: '<%= ftpaddress %>',
-              port: 21,
-              authKey: 'key1'
+             port: 21,
+             authKey: 'key1'
             },
             src: 'wordpress',
-            dest: 'public_html',
+            dest: 'rts',
             exclusions: ['public_html/**/.DS_Store', 'public_html/**/Thumbs.db', 'dist/tmp']
           }
-        },
+         },
 
         mysqldump: {
           dist: {
@@ -213,8 +201,8 @@ module.exports = function(grunt) {
             options: {
               patterns: [
                 {
-                 match: 'http://localhost:8888/wordpress',
-                 replacement: '<%= liveurl %>'
+                 match: 'fi-testing.co.uk/rts',
+                 replacement: 'http://www.roadtrafficsolutions.com'
                 }
               ],
               usePrefix: false
@@ -243,10 +231,13 @@ module.exports = function(grunt) {
     grunt.task.run('notify_hooks');
 
     // Pre Production
-    grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync']);
+    grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'imagemin', 'sync']);
 
     // Production Run
-    grunt.registerTask('launch', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'imagemin', 'webp', 'sync', 'db']);
+    grunt.registerTask('launch', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'imagemin', 'sync', 'mysqldump']);
+
+    // Database Replace
+    grunt.registerTask('dbchange', ['replace']);
 
     // Run Just CSS Production
     grunt.registerTask('cssfix', ['sass', 'autoprefixer', 'exec:get_grunt_sitemap','load_sitemap_json','uncss:dist', 'cssmin', 'concat']);
@@ -257,7 +248,7 @@ module.exports = function(grunt) {
     // Watch for CSS / JS changes and update browser
     grunt.registerTask('livechanges', ['browserSync', 'watch']);
 
-    grunt.registerTask('app_change', ['concat:app', 'uglify:app', 'uglify:main', 'uglify:yourprojectname']);
+    grunt.registerTask('app_change', ['concat:app', 'uglify:app', 'uglify:main', 'uglify:rts']);
     grunt.registerTask('concat_change', ['uglify:app', 'uglify:main']);
     grunt.registerTask('sass_change', ['sass']);
     grunt.registerTask('watchme', ['watch']);
@@ -266,7 +257,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-webp');
     grunt.loadNpmTasks('grunt-uncss');
-    grunt.registerTask('sync_files', ['sync'])
+    grunt.registerTask('sync_files', ['sync']);
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-ftp-upload');
     grunt.loadNpmTasks('grunt-browser-sync');
